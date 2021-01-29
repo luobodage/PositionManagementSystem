@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from datetime import datetime
 # Create your models here.
 
 JobTypes = [
@@ -25,5 +25,5 @@ class Job(models.Model):
     job_requirements = models.TextField(max_length=1024, blank=False, verbose_name='职位要求')
     # 外键引用 用User要导入 from django.contrib.auth.models import User 当用户删除时信息变为NULL
     creator = models.ForeignKey(User, verbose_name='发布人',null=True, on_delete=models.SET_NULL)
-    created_date = models.DateTimeField(verbose_name='创建日期')
-    modified_date = models.DateTimeField(verbose_name='最后修改时间')
+    created_date = models.DateTimeField(verbose_name='创建日期',default=datetime.now)
+    modified_date = models.DateTimeField(verbose_name='最后修改时间',default=datetime.now)
